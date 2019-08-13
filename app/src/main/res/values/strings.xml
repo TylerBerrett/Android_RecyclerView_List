@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ImageViewer</string>
+    <string name="uri_location_name">Uri Location Name:</string>
 </resources>
