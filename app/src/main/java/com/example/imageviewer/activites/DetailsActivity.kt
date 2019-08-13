@@ -1,10 +1,9 @@
-package com.example.imageviewer
+package com.example.imageviewer.activites
 
-import android.content.Intent
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.content.ContextCompat
+import com.example.imageviewer.R
+import com.example.imageviewer.model.ImageData
 import kotlinx.android.synthetic.main.activity_details.*
 
 class DetailsActivity : AppCompatActivity() {

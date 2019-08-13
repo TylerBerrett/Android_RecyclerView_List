@@ -1,18 +1,15 @@
-package com.example.imageviewer
+package com.example.imageviewer.activites
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.LinearLayout
-import android.widget.ListAdapter
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.imageviewer.recycler.ImageListAdapter
+import com.example.imageviewer.R
+import com.example.imageviewer.model.ImageData
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.image_item_layout.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,21 +19,6 @@ class MainActivity : AppCompatActivity() {
 
     val list = ArrayList<ImageData>()
     val manager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-
-    /*fun createTextView(text: String?, index: Int): TextView {
-        val displayText = TextView(this)
-        displayText.text = text
-        displayText.textSize = 32f
-        displayText.textAlignment = View.TEXT_ALIGNMENT_CENTER
-        displayText.setOnClickListener{
-            val intent = Intent(this, DetailsActivity::class.java)
-            intent.putExtra("key", list[index])
-            startActivity(intent)
-        }
-
-        return displayText
-
-    }*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,14 +31,11 @@ class MainActivity : AppCompatActivity() {
             if(intent.resolveActivity(packageManager) != null){
                 startActivityForResult(intent, IMG_CODE)
             }
-
         }
 
         recycler_view.setHasFixedSize(true)
         recycler_view.layoutManager = manager
         recycler_view.adapter = (ImageListAdapter(list))
-
-
     }
 
 
@@ -70,5 +49,4 @@ class MainActivity : AppCompatActivity() {
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
-
 }

@@ -1,4 +1,4 @@
-package com.example.imageviewer
+package com.example.imageviewer.model
 
 import android.net.Uri
 import java.io.Serializable
