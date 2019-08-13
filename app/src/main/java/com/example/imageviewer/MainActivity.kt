@@ -2,11 +2,17 @@ package com.example.imageviewer
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.LinearLayout
+import android.widget.ListAdapter
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.image_item_layout.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,8 +21,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     val list = ArrayList<ImageData>()
+    val manager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
-    fun createTextView(text: String?, index: Int): TextView {
+    /*fun createTextView(text: String?, index: Int): TextView {
         val displayText = TextView(this)
         displayText.text = text
         displayText.textSize = 32f
@@ -29,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
         return displayText
 
-    }
+    }*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +49,12 @@ class MainActivity : AppCompatActivity() {
             if(intent.resolveActivity(packageManager) != null){
                 startActivityForResult(intent, IMG_CODE)
             }
+
         }
+
+
+
+
     }
 
 
@@ -51,8 +63,11 @@ class MainActivity : AppCompatActivity() {
         if(requestCode == IMG_CODE && resultCode == Activity.RESULT_OK){
             val image = data?.data
             list.add(ImageData(image))
-            println(image)
-            scroll_layout.addView(createTextView(ImageData(image).uriToString, list.size - 1))
+            recycler_view.setHasFixedSize(true)
+            recycler_view.layoutManager = manager
+            recycler_view.adapter = (ImageListAdapter(list))
+            //recycler_view.adapter?.notifyItemChanged(list.size - 1)
+
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
