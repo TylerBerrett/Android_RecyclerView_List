@@ -52,7 +52,9 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-
+        recycler_view.setHasFixedSize(true)
+        recycler_view.layoutManager = manager
+        recycler_view.adapter = (ImageListAdapter(list))
 
 
     }
@@ -63,10 +65,7 @@ class MainActivity : AppCompatActivity() {
         if(requestCode == IMG_CODE && resultCode == Activity.RESULT_OK){
             val image = data?.data
             list.add(ImageData(image))
-            recycler_view.setHasFixedSize(true)
-            recycler_view.layoutManager = manager
-            recycler_view.adapter = (ImageListAdapter(list))
-            //recycler_view.adapter?.notifyItemChanged(list.size - 1)
+            recycler_view.adapter?.notifyItemInserted(list.size - 1)
 
         }
         super.onActivityResult(requestCode, resultCode, data)
